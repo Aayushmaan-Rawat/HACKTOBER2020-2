@@ -9,7 +9,6 @@ void push(int x)
 {
  struct Node *t;
  t=(struct Node*)malloc(sizeof(struct Node));
- 
  if(t==NULL)
  printf("stack is full\n");
  else
@@ -18,13 +17,11 @@ void push(int x)
  t->next=top;
  top=t;
  }
- 
 }
 int pop()
 {
  struct Node *t;
  int x=-1;
- 
  if(top==NULL)
  printf("Stack is Empty\n");
  else
@@ -48,9 +45,7 @@ void Display()
 }
 int main()
 {
-  
         int opt, ele ;
-    
     while (1)
     {
         printf("\n\n OPTION 1: PUSH");
@@ -64,18 +59,14 @@ int main()
             		scanf("%d", &ele);
             		push(ele);
             		Display();
-            		break;
-            
+            		break;           
         	case 2:	
             		pop();
          	      	Display();
          	        break;
-
-        	
         	case 3:	
         	        Display();
             		break;
-        
 			case 4: exit(0);
         			default:
             		break;
@@ -83,5 +74,3 @@ int main()
     }
     return 0;
 }
-
-
