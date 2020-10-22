@@ -116,7 +116,35 @@ void delspecific()
         printf("\n element deleted successfully \n New list is :\n");
        	display();   }
 }
-
+void countele()
+{   if (start == NULL)
+    {       printf("\n Empty list \n");  }
+    else
+    {  int count = 0;
+        struct node *ptr = start;
+        while (ptr != NULL)
+        {     ptr = ptr->next;
+            count++;  }
+        printf("\n Total elements in list: %d", count);  }
+}
+void reverse()
+{   if (start == NULL)
+    { printf("\n Empty list\n"); }
+    else
+    { struct node *p1,*p2,*p3;
+        p1 = start;
+        p2 = p1->next;
+        p3 = p2->next;
+        p1->next = NULL;
+        p2->next = p1;
+        while(p3!=NULL)
+      {      p1 = p2;
+            p2 = p3;
+            p3 = p3->next;
+            p2->next = p1; }
+        start = p2;
+        display();  }
+}
 int main()
 {   int opt, ele, ch=0, ch1=0, element, i;
     char nam[10];
@@ -125,8 +153,10 @@ int main()
     {    printf("\n\n OPTION 1: Creation of New list.");
 		printf("\n OPTION 2: Insersion in the list.");
 		printf("\n OPTION 3: Deletion from the list.");
-		printf("\n OPTION 4: Display the list.");
-		printf("\n OPTION 5: Exit ");
+		printf("\n OPTION 4: Counting of elements in the list.");
+		printf("\n OPTION 5: Display the list.");
+		printf("\n OPTION 6: Reversal of the list.");
+		printf("\n OPTION 7: Exit ");
         printf("\n\n Enter your option: ");
 		scanf("%d", &opt);
         switch (opt)
@@ -172,18 +202,20 @@ int main()
                 				break;
             			case 3: delend();
             				    break;
-				                default:
-                        printf("\n wrong input \n ");
-                    		break;       }
-                        break;
-			case 4: printf("\n Your list is : \n");
-              display();
-            	break;
-			case 5: exit(0);
+				default:printf("\n wrong input \n ");
+                    			break;       }
+                               		break;
+        	                             case 4: countele();
+            		                            break;
+			case 5: printf("\n Your list is : \n");
+            		                           display();
+            	                             	break;
+			case 6:	reverse();
+            		                            break;
+			case 7: exit(0);
         			default:
-              break;  	}
-        }
+            		                           break;  	}
+         }
     getch();
     return 0;
 }
-
