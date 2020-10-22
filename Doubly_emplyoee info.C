@@ -41,11 +41,11 @@ void main()
 	struct employee *ptr,*new_node = malloc(sizeof(struct employee));
     start = NULL;
     while (1)
-    {
-    printf("\n\n OPTION 1: Create New Record.");
+    {                       printf("\n\n OPTION 1: Create New Record.");
 		printf("\n OPTION 2: Insertion at end in the Record.");
-		printf("\n OPTION 3: Exit.");
-    printf("\n\n Enter your option: ");
+		printf("\n OPTION 3: Deletion at specific location from the list.");
+		printf("\n OPTION 4: Exit.");
+                             printf("\n\n Enter your option: ");
 		scanf("%d", &opt);
         switch (opt)
         {	case 1: printf("\n Enter the no. of Records: ");
@@ -79,11 +79,28 @@ void main()
         			new_node->next = NULL;
         			printf("\n New list :\n");
         			display();   }
-    				break;  				
-    		case 3: exit(0);
+    				break;
+    		case 3: if (start == NULL)
+    			printf("\n Underflow Error. ");
+    			else
+    			{	int add, c = 1;
+        				ptr = start;
+        				printf("\nEnter address of element to be deleted from list :");
+        				scanf("%d", &add);
+        				while (c < add - 1)
+        				{   ptr = ptr->next;
+        			                   ++c;    }
+        				ptr->next = ptr->next->next;
+        				ptr->next->prev = ptr->next;
+    				}
+    				printf("\n element deleted successfully \n New list is :\n");
+       				display();
+    				break;    				
+    		case 4: exit(0);
         			default:
             		break;
 		}
-		     }
-               getch();     }
+		  }
+     getch();    
+}
    }
