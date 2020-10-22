@@ -13,6 +13,7 @@ struct queue
 struct queue *q;
 void create_queue (struct queue *);
 struct queue *insert (struct queue *, int);
+struct queue *delete_element (struct queue *);
 struct queue *display (struct queue *);
 int main ()
 {
@@ -22,8 +23,9 @@ int main ()
     {
       printf ("\n MAIN MENU");
       printf ("\n 1. INSERT");
-      printf ("\n 2. DISPLAY");
-      printf ("\n 3. EXIT");
+      printf ("\n 2. DELETE");
+      printf ("\n 3. DISPLAY");
+      printf ("\n 4. EXIT");
       printf ("\n Enter your option : ");
       scanf ("%d", &option);
       switch (option)
@@ -35,12 +37,16 @@ int main ()
 	  display(q);
 	  break;
 	case 2:
+	  q = delete_element (q);
+	  display(q);
+	  break;
+	case 3:
 	  q = display (q);
 	  break;
 	}
 printf("\n PARMEET KAUR CSE 2 09213202719");
     }
-  while (option != 3);
+  while (option != 4);
   return 0;
 }
 
@@ -89,4 +95,18 @@ struct queue *display (struct queue *q)
   return q;
 }
 
+struct queue *delete_element (struct queue *q)
+{
+  struct node *ptr;
+  ptr = q->front;
+  if (q->front == NULL)
+    printf ("\n UNDERFLOW");
+  else
+    {
+      q->front = q->front->next;
+      printf ("\n The value being deleted is : %d", ptr->data);
+      free (ptr);
+    }
+  return q;
+}
 
