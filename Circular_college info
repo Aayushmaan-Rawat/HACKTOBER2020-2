@@ -44,6 +44,41 @@ void createlist(char name[], int data)
     }
 }
 
+void insertbeg(char name[],int element)
+{
+    struct college *new_node = (struct college*)malloc(sizeof(struct college)),*ptr = start;
+    new_node->cllgid = element;
+    strcpy(new_node->cllgname,name);
+    if (start == NULL)
+    {
+        new_node->next = ptr;
+        start = new_node;
+    }
+    else
+    {
+        while(ptr->next != start)
+            ptr = ptr->next;
+        ptr->next = new_node;
+        new_node->next = start;
+        start = new_node;
+        printf("Element inserted successfully \nNew List :\n");
+        display();
+    }
+}
+
+void delend()
+{
+    if (start == NULL)
+        printf("\nEmpty List,therefore no data to delete\n");
+    else
+    {
+        struct college *ptr = start;
+        while (ptr->next->next != start)
+            ptr = ptr->next;
+        ptr->next = start;
+    }
+}
+
 int main()
 {    clrscr();
     int choice,ele,id;
@@ -51,7 +86,8 @@ int main()
     start = NULL;
     while (1)
     {
-        printf("\n Press 1 for creating new list \n Press 2 for Display the list \n Press 3 for exit \n ");
+        printf("\n Press 1 for creating new list \n Press 2 for insertion at beginning of list \n Press 3 for Deleting "
+               " element from end of list \n Press 4 for Display the list \n Press 5 for exit \n ");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -69,13 +105,24 @@ int main()
             }
             printf("\nList created succesfuly\n");
             break;
-    
         case 2:
+            printf("\n Enter the college name : ");
+            scanf("%s",&name);
+            printf("\n Enter the college id : ");
+            scanf("%d",&id);
+            insertbeg(name,id);
+            break;
+        case 3:
+            delend();
+            printf("\n Deleted successfully \n");
+            display();
+            break;
+        case 4:
             display();
             break;
 }
 }
-  while (option != 3);
+  while (option != 5);
     getch();
     return 0;
 }
