@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <conio.h>
+#include <malloc.h>
+#include<string.h>
+
+struct college
+{
+    char cllgname[50];
+    int cllgid;
+    struct college *next;
+} * start;
+
+void display()
+{
+    if (start == NULL)
+    printf("\nEmpty List\n");
+    else
+    {
+        struct college *ptr = start;
+        do
+        {
+            printf("Employee Name : %s\nEmployee Id : %d\n", ptr->cllgname, ptr->cllgid);
+            ptr = ptr->next;
+        }while(ptr != start);
+    }
+}
+
+void createlist(char name[], int data)
+{
+    struct college *new_node = (struct college*)malloc(sizeof(struct college)), *ptr = start ;
+    new_node->cllgid = data;
+    strcpy(new_node->cllgname, name);
+    if (start == NULL)
+    {
+        new_node->next = new_node;
+        start = new_node;
+    }
+    else
+    {
+        while (ptr->next != start)
+            ptr = ptr->next;
+        ptr->next = new_node;
+        new_node->next = start;
+    }
+}
+
+int main()
+{    clrscr();
+    int choice,ele,id;
+    char name[50];
+    start = NULL;
+    while (1)
+    {
+        printf("\n Press 1 for creating new list \n Press 2 for Display the list \n Press 3 for exit \n ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("\n enter the number of elements you are going to enter : ");
+            scanf("%d", &ele);
+            printf("\n you can start entering elements :\n");
+            for (int i = 0; i < ele; i++)
+            {
+                printf("Enter College %d Name - ", i+1);
+                scanf("%s",&name);
+                printf("Enter College %d Id - ", i+1);
+                scanf("%d",&id);
+                createlist(name, id);
+            }
+            printf("\nList created succesfuly\n");
+            break;
+    
+        case 2:
+            display();
+            break;
+}
+}
+  while (option != 3);
+    getch();
+    return 0;
+}
+
